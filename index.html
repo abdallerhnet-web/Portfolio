@@ -3,763 +3,627 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Abdullahi Yakubu</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<title>Abdullahi Yakubu — BD · Community · Builder</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --black: #0A0A0A;
-    --white: #F5F3EE;
-    --accent: #C8F135;
-    --accent-dim: rgba(200,241,53,0.12);
-    --grey: #1A1A1A;
-    --grey2: #2A2A2A;
-    --muted: #666;
-    --text: #E8E6E1;
-  }
+:root {
+  --black: #070707;
+  --white: #F4F2ED;
+  --accent: #C8F135;
+  --grey: #0F0F0F;
+  --grey2: #181818;
+  --grey3: #222;
+  --muted: #555;
+  --muted2: #888;
+  --text: #C8C5BE;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--text);font-family:'Outfit',sans-serif;overflow-x:hidden;cursor:none;}
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* grain */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1;opacity:0.5;}
 
-  html { scroll-behavior: smooth; }
+/* cursor */
+.cursor{width:8px;height:8px;background:var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.15s,width 0.2s,height 0.2s;}
+.cursor-ring{width:30px;height:30px;border:1px solid rgba(200,241,53,0.3);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);}
 
-  body {
-    background: var(--black);
-    color: var(--text);
-    font-family: 'Outfit', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-    cursor: none;
-  }
+/* ── TICKER ── */
+.ticker-bar{background:var(--grey2);border-bottom:1px solid var(--grey3);padding:9px 0;overflow:hidden;}
+.ticker-inner{display:flex;white-space:nowrap;animation:tick 30s linear infinite;}
+.ticker-inner:hover{animation-play-state:paused;}
+.tick-item{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);padding:0 28px;flex-shrink:0;}
+.tick-item b{color:var(--accent);font-weight:400;margin-right:6px;}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
-  /* Custom cursor */
-  .cursor {
-    width: 10px; height: 10px;
-    background: var(--accent);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.15s, opacity 0.15s;
-    transform: translate(-50%, -50%);
-  }
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;border-bottom:1px solid rgba(255,255,255,0.05);backdrop-filter:blur(16px);background:rgba(7,7,7,0.8);}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 48px;height:60px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;text-decoration:none;}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:var(--accent);}
+.nav-live{display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:10px;color:var(--muted2);letter-spacing:1px;}
+.nav-live-dot{width:6px;height:6px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80;animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
 
-  .cursor-ring {
-    width: 36px; height: 36px;
-    border: 1px solid rgba(200,241,53,0.4);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: all 0.12s ease;
-  }
+/* ── HERO ── */
+.hero{height:100vh;min-height:700px;display:grid;grid-template-columns:1fr 1fr;padding-top:60px;}
 
-  /* Noise texture overlay */
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.4;
-  }
+.hero-left{
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 0 80px 80px;
+  position:relative;
+  overflow:hidden;
+}
 
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 32px;
-    position: relative;
-    z-index: 2;
-  }
+/* big ghost letter */
+.hero-left::before{
+  content:'AY';
+  position:absolute;top:-40px;left:-20px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:400px;font-weight:700;font-style:italic;
+  color:rgba(200,241,53,0.025);
+  line-height:1;pointer-events:none;user-select:none;
+  z-index:0;
+}
 
-  /* ── NAV ── */
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 32px 0;
-    border-bottom: 1px solid var(--grey2);
-  }
+.hero-content{position:relative;z-index:1;}
 
-  .nav-logo {
-    font-family: 'DM Mono', monospace;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
+.hero-eyebrow{
+  font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);
+  letter-spacing:3px;text-transform:uppercase;margin-bottom:28px;
+  display:flex;align-items:center;gap:10px;
+  opacity:0;animation:up 0.7s ease forwards 0.2s;
+}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--accent);}
 
-  .nav-links {
-    display: flex;
-    gap: 32px;
-    list-style: none;
-  }
+.hero-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(64px,7.5vw,108px);
+  font-weight:600;line-height:0.92;
+  letter-spacing:-2px;color:var(--white);
+  margin-bottom:28px;
+  opacity:0;animation:up 0.8s ease forwards 0.35s;
+}
+.hero-name em{font-style:italic;color:var(--accent);}
 
-  .nav-links a {
-    font-size: 13px;
-    color: var(--muted);
-    text-decoration: none;
-    font-weight: 500;
-    letter-spacing: 0.3px;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--accent); }
+.hero-roles{
+  display:flex;flex-direction:column;gap:6px;margin-bottom:40px;
+  opacity:0;animation:up 0.7s ease forwards 0.5s;
+}
+.hero-role-line{
+  display:flex;align-items:center;gap:12px;
+  font-size:14px;font-weight:400;color:var(--text);
+}
+.hero-role-line::before{content:'';width:14px;height:1px;background:var(--grey3);}
+.hero-role-company{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-left:4px;letter-spacing:0.5px;}
 
-  /* ── HERO ── */
-  .hero {
-    padding: 100px 0 80px;
-    position: relative;
-  }
+.hero-cta{
+  display:flex;gap:12px;
+  opacity:0;animation:up 0.7s ease forwards 0.65s;
+}
+.btn-primary{
+  background:var(--accent);color:var(--black);
+  padding:13px 28px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;
+  letter-spacing:0.3px;text-decoration:none;transition:all 0.2s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{background:#d4f545;transform:translateY(-2px);}
+.btn-outline{
+  background:transparent;color:var(--text);
+  padding:13px 28px;border:1px solid var(--grey3);
+  font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;
+  text-decoration:none;transition:all 0.2s;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
 
-  .hero-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    opacity: 0;
-    animation: fadeUp 0.6s ease forwards 0.1s;
-  }
+/* hero right — photo */
+.hero-right{position:relative;overflow:hidden;background:var(--grey);}
+.hero-photo{
+  width:100%;height:100%;object-fit:cover;object-position:center top;
+  display:block;filter:grayscale(20%);
+  opacity:0;animation:fadeIn 1.2s ease forwards 0.4s;
+}
+@keyframes fadeIn{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:scale(1)}}
 
-  .hero-eyebrow::before {
-    content: '';
-    width: 32px; height: 1px;
-    background: var(--accent);
-  }
+.hero-photo-fallback{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:96px;font-weight:300;
+  font-style:italic;color:rgba(200,241,53,0.15);
+}
 
-  .hero-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(52px, 8vw, 88px);
-    line-height: 1.0;
-    letter-spacing: -2px;
-    color: var(--white);
-    margin-bottom: 12px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.2s;
-  }
+/* photo overlay gradient */
+.hero-right::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to right, var(--black) 0%, transparent 20%),
+             linear-gradient(to top, var(--black) 0%, transparent 25%);
+  pointer-events:none;
+}
 
-  .hero-name em {
-    font-style: italic;
-    color: var(--accent);
-  }
+/* floating stat cards */
+.hero-stats{
+  position:absolute;bottom:40px;right:40px;z-index:2;
+  display:flex;flex-direction:column;gap:8px;
+}
+.hero-stat{
+  background:rgba(7,7,7,0.85);border:1px solid var(--grey3);
+  backdrop-filter:blur(12px);padding:12px 18px;
+  opacity:0;animation:up 0.6s ease forwards;
+}
+.hero-stat:nth-child(1){animation-delay:0.9s;}
+.hero-stat:nth-child(2){animation-delay:1.0s;}
+.hero-stat:nth-child(3){animation-delay:1.1s;}
+.hero-stat-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:var(--accent);line-height:1;}
+.hero-stat-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
 
-  .hero-title {
-    font-size: 16px;
-    color: var(--muted);
-    font-weight: 400;
-    margin-bottom: 40px;
-    font-family: 'DM Mono', monospace;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.35s;
-  }
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 
-  .hero-title span {
-    color: var(--text);
-    font-weight: 500;
-  }
+/* ── INTRO BAND ── */
+.intro-band{
+  border-top:1px solid var(--grey3);border-bottom:1px solid var(--grey3);
+  padding:36px 80px;
+  display:grid;grid-template-columns:1fr 2px 1fr 2px 1fr;gap:0;align-items:center;
+}
+.intro-divider{width:1px;height:100%;background:var(--grey3);margin:0 40px;}
+.intro-item{}
+.intro-item-label{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.intro-item-value{font-size:15px;font-weight:500;color:var(--white);line-height:1.5;}
+.intro-item-value em{font-style:normal;color:var(--accent);}
 
-  .hero-bio {
-    font-size: 18px;
-    line-height: 1.7;
-    color: var(--text);
-    max-width: 560px;
-    font-weight: 300;
-    margin-bottom: 52px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.45s;
-  }
+/* ── SECTIONS ── */
+.section-wrap{max-width:1200px;margin:0 auto;padding:0 80px;}
 
-  .hero-bio strong {
-    color: var(--white);
-    font-weight: 600;
-  }
+.section{padding:80px 0;border-bottom:1px solid var(--grey3);}
 
-  .hero-cta {
-    display: flex;
-    gap: 14px;
-    flex-wrap: wrap;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.55s;
-  }
+.sec-tag{
+  font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);
+  letter-spacing:3px;text-transform:uppercase;margin-bottom:40px;
+  display:flex;align-items:center;gap:14px;
+}
+.sec-tag::after{content:'';flex:1;height:1px;background:var(--grey3);}
 
-  .btn-accent {
-    background: var(--accent);
-    color: var(--black);
-    padding: 13px 28px;
-    border-radius: 4px;
-    font-family: 'Outfit', sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    text-decoration: none;
-    letter-spacing: 0.3px;
-    transition: all 0.2s;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .btn-accent:hover { background: #d4f545; transform: translateY(-2px); }
+.sec-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,4vw,54px);font-weight:600;
+  line-height:1.1;letter-spacing:-0.5px;color:var(--white);
+  margin-bottom:48px;
+}
+.sec-title em{font-style:italic;color:var(--accent);}
 
-  .btn-ghost {
-    background: transparent;
-    color: var(--text);
-    padding: 13px 28px;
-    border-radius: 4px;
-    border: 1px solid var(--grey2);
-    font-family: 'Outfit', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.2s;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.about-body p{font-size:16px;line-height:1.9;color:var(--text);font-weight:300;margin-bottom:20px;}
+.about-body p:last-child{margin-bottom:0;}
+.about-body strong{color:var(--white);font-weight:600;}
 
-  /* ── STATS ROW ── */
-  .stats-strip {
-    border-top: 1px solid var(--grey2);
-    border-bottom: 1px solid var(--grey2);
-    padding: 28px 0;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    margin-bottom: 80px;
-    opacity: 0;
-    animation: fadeUp 0.7s ease forwards 0.65s;
-  }
+.about-pull{
+  padding:28px 32px;border-left:2px solid var(--accent);
+  background:var(--grey);margin:0;
+}
+.about-pull p{
+  font-family:'Cormorant Garamond',serif;font-style:italic;
+  font-size:22px;line-height:1.6;color:var(--white);margin:0 !important;
+}
 
-  .stat-item {
-    padding: 0 32px;
-    border-right: 1px solid var(--grey2);
-  }
-  .stat-item:first-child { padding-left: 0; }
-  .stat-item:last-child { border-right: none; }
+.regions-list{margin-top:32px;display:flex;flex-wrap:wrap;gap:8px;}
+.region-tag{
+  font-family:'DM Mono',monospace;font-size:10px;color:var(--text);
+  background:var(--grey2);border:1px solid var(--grey3);
+  padding:6px 12px;letter-spacing:0.5px;
+}
 
-  .stat-num {
-    font-family: 'DM Serif Display', serif;
-    font-size: 42px;
-    color: var(--accent);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
+/* ── WORK ── */
+.work-list{display:flex;flex-direction:column;gap:1px;}
+.work-item{
+  display:grid;grid-template-columns:48px 1fr auto;gap:24px;align-items:start;
+  padding:28px 32px;background:var(--grey);border:1px solid var(--grey3);
+  transition:border-color 0.2s,transform 0.2s;cursor:default;
+}
+.work-item:hover{border-color:rgba(200,241,53,0.25);transform:translateX(4px);}
+.work-num{
+  font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;
+  color:rgba(200,241,53,0.2);line-height:1;
+}
+.work-content{}
+.work-title{font-size:17px;font-weight:700;color:var(--white);margin-bottom:3px;}
+.work-company{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:10px;letter-spacing:0.5px;}
+.work-desc{font-size:13px;color:var(--muted2);line-height:1.65;}
+.work-meta{text-align:right;}
+.work-icon{font-size:22px;}
 
-  .stat-label {
-    font-size: 12px;
-    color: var(--muted);
-    font-family: 'DM Mono', monospace;
-    letter-spacing: 0.5px;
-  }
+/* ── COMPETITIONS ── */
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.comp-card{
+  padding:32px;background:var(--grey);border:1px solid var(--grey3);
+  position:relative;overflow:hidden;transition:border-color 0.2s;
+}
+.comp-card.live{border-color:rgba(200,241,53,0.2);}
+.comp-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(200,241,53,0.04) 0%,transparent 50%);
+  pointer-events:none;
+}
+.comp-name{font-size:20px;font-weight:700;color:var(--white);margin-bottom:4px;}
+.comp-date{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-bottom:12px;letter-spacing:1px;}
+.comp-desc{font-size:13px;color:var(--muted2);line-height:1.65;margin-bottom:16px;}
+.comp-live{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);
+  background:rgba(200,241,53,0.08);border:1px solid rgba(200,241,53,0.2);
+  padding:4px 10px;letter-spacing:1px;text-transform:uppercase;
+}
+.comp-live::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--accent);animation:blink 1.5s infinite;}
 
-  /* ── SECTIONS ── */
-  .section {
-    padding: 72px 0;
-    border-bottom: 1px solid var(--grey2);
-  }
+/* ── PROJECT ── */
+.project-hero{
+  padding:40px;background:var(--grey);border:1px solid var(--grey3);
+  display:grid;grid-template-columns:1fr 280px;gap:48px;align-items:start;
+  position:relative;overflow:hidden;transition:border-color 0.2s;
+}
+.project-hero:hover{border-color:rgba(200,241,53,0.3);}
+.project-hero::after{
+  content:'24';position:absolute;right:-10px;bottom:-30px;
+  font-family:'Cormorant Garamond',serif;font-size:240px;font-weight:700;font-style:italic;
+  color:rgba(200,241,53,0.03);line-height:1;pointer-events:none;user-select:none;
+}
+.proj-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'DM Mono',monospace;font-size:9px;
+  color:var(--black);background:var(--accent);
+  padding:5px 12px;letter-spacing:1px;text-transform:uppercase;
+  font-weight:500;margin-bottom:16px;
+}
+.proj-name{
+  font-family:'Cormorant Garamond',serif;font-size:56px;font-weight:600;
+  color:var(--white);letter-spacing:-2px;line-height:1;margin-bottom:6px;
+}
+.proj-tagline{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);margin-bottom:18px;letter-spacing:0.5px;}
+.proj-desc{font-size:14px;color:var(--muted2);line-height:1.8;margin-bottom:24px;max-width:480px;}
+.proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px;}
+.tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--text);background:var(--grey2);border:1px solid var(--grey3);padding:5px 12px;}
 
-  .section-tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: var(--accent);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 40px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .section-tag::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--grey2);
-  }
+.contracts-block{}
+.cb-title{font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--grey3);}
+.cb-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.03);}
+.cb-row:last-child{border-bottom:none;}
+.cb-name{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:0.3px;}
+.cb-addr{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.3px;}
 
-  /* ── ROLES ── */
-  .roles-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
+.proj-actions{display:flex;flex-direction:column;gap:10px;position:relative;z-index:1;}
 
-  .role-card {
-    background: var(--grey);
-    border: 1px solid var(--grey2);
-    border-radius: 8px;
-    padding: 28px;
-    transition: border-color 0.2s, transform 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
+/* ── SKILLS ── */
+.skills-wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.skill-pill{
+  display:flex;align-items:center;gap:10px;
+  padding:14px 16px;background:var(--grey);border:1px solid var(--grey3);
+  transition:border-color 0.2s;
+}
+.skill-pill:hover{border-color:rgba(200,241,53,0.2);}
+.skill-dot{width:4px;height:4px;border-radius:50%;background:var(--accent);flex-shrink:0;}
+.skill-name{font-size:12px;font-weight:500;color:var(--text);}
 
-  .role-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: var(--accent);
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
+/* ── CONNECT ── */
+.connect-wrap{
+  padding:100px 0;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+}
+.connect-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(52px,6vw,80px);font-weight:600;
+  line-height:0.95;letter-spacing:-2px;color:var(--white);margin-bottom:20px;
+}
+.connect-title em{font-style:italic;color:var(--accent);}
+.connect-sub{font-size:15px;color:var(--muted2);font-weight:300;line-height:1.8;}
 
-  .role-card:hover { border-color: rgba(200,241,53,0.3); transform: translateY(-3px); }
-  .role-card:hover::before { opacity: 1; }
+.links-stack{display:flex;flex-direction:column;gap:8px;}
+.soc-link{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 20px;background:var(--grey);border:1px solid var(--grey3);
+  text-decoration:none;color:var(--text);font-family:'DM Mono',monospace;font-size:12px;
+  letter-spacing:0.5px;transition:all 0.2s;
+}
+.soc-link:hover{border-color:var(--accent);color:var(--accent);transform:translateX(6px);}
+.soc-link-ico{font-size:14px;width:20px;text-align:center;}
+.soc-link-arrow{margin-left:auto;color:var(--grey3);transition:color 0.2s;}
+.soc-link:hover .soc-link-arrow{color:var(--accent);}
 
-  .role-icon { font-size: 28px; margin-bottom: 16px; }
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--grey3);padding:24px 0;display:flex;align-items:center;justify-content:space-between;}
+.foot-l{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.5px;}
+.foot-r{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);}
+.foot-r span{color:var(--accent);}
 
-  .role-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 4px;
-  }
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
 
-  .role-company {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--accent);
-    margin-bottom: 12px;
-    letter-spacing: 0.5px;
-  }
-
-  .role-desc {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.6;
-  }
-
-  /* ── PROJECT ── */
-  .project-card {
-    background: var(--grey);
-    border: 1px solid var(--grey2);
-    border-radius: 8px;
-    padding: 36px;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 24px;
-    align-items: start;
-    transition: border-color 0.2s;
-  }
-  .project-card:hover { border-color: rgba(200,241,53,0.3); }
-
-  .project-badge {
-    font-family: 'DM Mono', monospace;
-    font-size: 9px;
-    color: var(--black);
-    background: var(--accent);
-    padding: 4px 10px;
-    border-radius: 3px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-weight: 500;
-    white-space: nowrap;
-  }
-
-  .project-name {
-    font-family: 'DM Serif Display', serif;
-    font-size: 32px;
-    color: var(--white);
-    margin-bottom: 8px;
-    letter-spacing: -0.5px;
-  }
-
-  .project-tagline {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
-    color: var(--accent);
-    margin-bottom: 16px;
-    letter-spacing: 0.3px;
-  }
-
-  .project-desc {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.7;
-    margin-bottom: 24px;
-  }
-
-  .project-stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: var(--text);
-    background: var(--grey2);
-    border: 1px solid #333;
-    padding: 5px 12px;
-    border-radius: 3px;
-    letter-spacing: 0.5px;
-  }
-
-  /* ── SKILLS ── */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-
-  .skill-item {
-    background: var(--grey);
-    border: 1px solid var(--grey2);
-    border-radius: 6px;
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    transition: border-color 0.2s;
-  }
-  .skill-item:hover { border-color: rgba(200,241,53,0.3); }
-
-  .skill-dot {
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    flex-shrink: 0;
-  }
-
-  .skill-name {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text);
-  }
-
-  /* ── CONNECT ── */
-  .connect-section {
-    padding: 80px 0;
-    text-align: center;
-  }
-
-  .connect-title {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(36px, 5vw, 56px);
-    color: var(--white);
-    margin-bottom: 16px;
-    letter-spacing: -1px;
-  }
-
-  .connect-title em {
-    font-style: italic;
-    color: var(--accent);
-  }
-
-  .connect-sub {
-    font-size: 15px;
-    color: var(--muted);
-    margin-bottom: 40px;
-    font-weight: 300;
-  }
-
-  .social-links {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .social-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 22px;
-    background: var(--grey);
-    border: 1px solid var(--grey2);
-    border-radius: 6px;
-    text-decoration: none;
-    color: var(--text);
-    font-size: 13px;
-    font-weight: 500;
-    transition: all 0.2s;
-    font-family: 'DM Mono', monospace;
-  }
-  .social-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--grey2);
-    padding: 28px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .footer-left {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-  }
-
-  .footer-right {
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-  }
-
-  .footer-right span { color: var(--accent); }
-
-  /* ── PHOTO ── */
-  .hero-photo {
-    width: 100px; height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--accent);
-    margin-bottom: 28px;
-    display: block;
-    box-shadow: 0 0 24px rgba(200,241,53,0.2);
-  }
-
-  .hero-photo-placeholder {
-    width: 100px; height: 100px;
-    border-radius: 50%;
-    background: var(--grey2);
-    border: 2px dashed var(--grey2);
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 36px;
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 600px) {
-    .roles-grid { grid-template-columns: 1fr; }
-    .skills-grid { grid-template-columns: 1fr 1fr; }
-    .stats-strip { grid-template-columns: 1fr; gap: 24px; }
-    .stat-item { border-right: none; border-bottom: 1px solid var(--grey2); padding: 0 0 24px; }
-    .stat-item:last-child { border-bottom: none; }
-    .project-card { grid-template-columns: 1fr; }
-    .nav-links { display: none; }
-    body { cursor: auto; }
-    .cursor, .cursor-ring { display: none; }
-  }
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;height:auto;min-height:auto;}
+  .hero-left{padding:100px 24px 48px;}
+  .hero-right{height:360px;}
+  .hero-left::before{font-size:200px;}
+  .intro-band{padding:36px 24px;grid-template-columns:1fr;gap:24px;}
+  .intro-divider{display:none;}
+  .section-wrap{padding:0 24px;}
+  .about-grid{grid-template-columns:1fr;}
+  .work-item{grid-template-columns:1fr;gap:12px;}
+  .work-num{display:none;}
+  .comp-grid{grid-template-columns:1fr;}
+  .project-hero{grid-template-columns:1fr;}
+  .skills-wrap{grid-template-columns:1fr 1fr;}
+  .connect-wrap{grid-template-columns:1fr;gap:48px;}
+  .nav-links{display:none;}
+  body{cursor:auto;}
+  .cursor,.cursor-ring{display:none;}
+}
 </style>
 </head>
 <body>
 
 <div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-ring" id="ring"></div>
 
-<div class="container">
+<!-- Ticker -->
+<div class="ticker-bar">
+  <div class="ticker-inner" id="ticker">
+    <span class="tick-item"><b>→</b>Thailand</span><span class="tick-item"><b>→</b>Korea</span><span class="tick-item"><b>→</b>China</span><span class="tick-item"><b>→</b>Dubai</span><span class="tick-item"><b>→</b>India</span><span class="tick-item"><b>→</b>Africa</span><span class="tick-item"><b>→</b>Vietnam</span><span class="tick-item"><b>→</b>Turkey</span><span class="tick-item"><b>→</b>Singapore</span><span class="tick-item"><b>→</b>Indonesia</span><span class="tick-item"><b>→</b>France</span><span class="tick-item"><b>→</b>Spain</span><span class="tick-item"><b>→</b>Russia</span><span class="tick-item"><b>→</b>Pakistan</span><span class="tick-item"><b>→</b>250+ KOLs</span><span class="tick-item"><b>→</b>15+ Regions</span>
+    <span class="tick-item"><b>→</b>Thailand</span><span class="tick-item"><b>→</b>Korea</span><span class="tick-item"><b>→</b>China</span><span class="tick-item"><b>→</b>Dubai</span><span class="tick-item"><b>→</b>India</span><span class="tick-item"><b>→</b>Africa</span><span class="tick-item"><b>→</b>Vietnam</span><span class="tick-item"><b>→</b>Turkey</span><span class="tick-item"><b>→</b>Singapore</span><span class="tick-item"><b>→</b>Indonesia</span><span class="tick-item"><b>→</b>France</span><span class="tick-item"><b>→</b>Spain</span><span class="tick-item"><b>→</b>Russia</span><span class="tick-item"><b>→</b>Pakistan</span><span class="tick-item"><b>→</b>250+ KOLs</span><span class="tick-item"><b>→</b>15+ Regions</span>
+  </div>
+</div>
 
-  <!-- Nav -->
-  <nav>
-    <div class="nav-logo">AY / Portfolio</div>
+<!-- Nav -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">AY / Portfolio</a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#work">Work</a></li>
-      <li><a href="#projects">Projects</a></li>
+      <li><a href="#project">Project</a></li>
       <li><a href="#connect">Connect</a></li>
     </ul>
-  </nav>
+    <div class="nav-live"><div class="nav-live-dot"></div>Available</div>
+  </div>
+</nav>
 
-  <!-- Hero -->
-  <section class="hero" id="about">
-    <div class="hero-eyebrow">Africa · Web3 Builder</div>
-    <img src="https://raw.githubusercontent.com/abdallerhnet-web/Portfolio/main/20260302_020936.jpg" alt="Abdullahi Yakubu" class="hero-photo" onerror="this.style.display='none';document.getElementById('photoPlaceholder').style.display='flex'"/>
-    <div class="hero-photo-placeholder" id="photoPlaceholder" style="display:none">👤</div>
-    <h1 class="hero-name">Abdullahi<br/><em>Yakubu</em></h1>
-    <div class="hero-title">
-      BD · Community · <span>Builder</span>
-    </div>
-    <p class="hero-bio">
-      I build at the intersection of <strong>people, protocol, and product.</strong> 
-      From managing 250+ KOLs across Thailand, Korea, China, Dubai, India, Africa and 15+ regions worldwide — to shipping live smart contracts on Base. 
-      I get things done, from my phone, in the middle of the night, until it works.
-    </p>
-    <div class="hero-cta">
-      <a href="#projects" class="btn-accent">View My Work →</a>
-      <a href="#connect" class="btn-ghost">Get In Touch</a>
-    </div>
-  </section>
-
-  <!-- Stats -->
-  <div class="stats-strip">
-    <div class="stat-item">
-      <div class="stat-num">250+</div>
-      <div class="stat-label">KOL Connections</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">15+</div>
-      <div class="stat-label">Regions Worldwide</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num">1</div>
-      <div class="stat-label">Live dApp Shipped</div>
+<!-- HERO -->
+<section class="hero" id="about">
+  <div class="hero-left">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Africa · Web3 Builder</div>
+      <h1 class="hero-name">Abdullahi<br/><em>Yakubu</em></h1>
+      <div class="hero-roles">
+        <div class="hero-role-line">Founder, rep24 <span class="hero-role-company">Base · Live</span></div>
+        <div class="hero-role-line">BD & Collab Manager <span class="hero-role-company">Victus Global</span></div>
+        <div class="hero-role-line">Community Manager <span class="hero-role-company">Web3</span></div>
+      </div>
+      <div class="hero-cta">
+        <a href="#project" class="btn-primary">View rep24 →</a>
+        <a href="#connect" class="btn-outline">Get In Touch</a>
+      </div>
     </div>
   </div>
-
-  <!-- Work -->
-  <section class="section reveal" id="work">
-    <div class="section-tag">What I Do</div>
-    <div class="roles-grid">
-      <div class="role-card">
-        <div class="role-icon">🤝</div>
-        <div class="role-title">Collab Manager</div>
-        <div class="role-company">Worldwide · 250+ KOLs</div>
-        <div class="role-desc">Managing 250+ KOL relationships across Thailand, Indonesia, China, Singapore, Korea, Dubai, India, Vietnam, Turkey, France, Spain, Russia, Pakistan, Africa and beyond. Building partnerships that move communities and drive real growth for Web3 projects globally.</div>
+  <div class="hero-right">
+    <img
+      id="heroImg"
+      src="https://raw.githubusercontent.com/abdallerhnet-web/Portfolio/main/20260302_020936.jpg"
+      alt="Abdullahi Yakubu"
+      class="hero-photo"
+      onerror="this.style.display='none';document.getElementById('heroFallback').style.display='flex';"
+    />
+    <div class="hero-photo-fallback" id="heroFallback" style="display:none;">AY</div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">250+</div>
+        <div class="hero-stat-label">KOL Connections</div>
       </div>
-      <div class="role-card">
-        <div class="role-icon">📈</div>
-        <div class="role-title">Business Development</div>
-        <div class="role-company">@ Victus Global</div>
-        <div class="role-desc">Driving strategic partnerships and growth initiatives. Connecting projects with the right people, communities, and resources to scale.</div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">15+</div>
+        <div class="hero-stat-label">Regions Worldwide</div>
       </div>
-      <div class="role-card">
-        <div class="role-icon">🌐</div>
-        <div class="role-title">Community Manager</div>
-        <div class="role-company">Web3 Ecosystem</div>
-        <div class="role-desc">Building and nurturing communities that actually engage. Turning audiences into believers and believers into builders.</div>
-      </div>
-      <div class="role-card">
-        <div class="role-icon">⚙️</div>
-        <div class="role-title">On-Chain Builder</div>
-        <div class="role-company">Base · Solidity · Web · Bots</div>
-        <div class="role-desc">Non-traditional developer who ships. Deployed live smart contracts on Base, built dApp frontends, developed websites and bots for Web3 projects — all from mobile.</div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">5</div>
+        <div class="hero-stat-label">Live Contracts</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Projects -->
-  <section class="section reveal" id="projects">
-    <div class="section-tag">Featured Project</div>
-    <div class="project-card">
-      <div>
-        <div class="project-name">rep24</div>
-        <div class="project-tagline">x402 pays · ERC-8004 identifies · rep24 verifies</div>
-        <p class="project-desc">
-          An on-chain reputation and economic accountability layer for AI agents, built on Base. 
-          Agents stake USDC to earn a RepBadge NFT. Bad work gets slashed. Good work grows your score. 
-          The missing trust layer for the agentic economy.
-        </p>
-        <div class="project-stack">
-          <span class="tag">Base Blockchain</span>
-          <span class="tag">Solidity</span>
-          <span class="tag">ERC-8004</span>
-          <span class="tag">x402</span>
-          <span class="tag">USDC Staking</span>
-          <span class="tag">NFT</span>
-        </div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-end">
-        <span class="project-badge">Live · Testnet</span>
-        <a href="https://abdallerhnet-web.github.io/rep24/" target="_blank" class="btn-accent" style="font-size:12px;padding:10px 16px">View dApp →</a>
-        <a href="https://github.com/abdallerhnet-web/rep24" target="_blank" class="btn-ghost" style="font-size:12px;padding:10px 16px">GitHub</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section class="section reveal">
-    <div class="section-tag">Skills & Tools</div>
-    <div class="skills-grid">
-      <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Website Development</span></div>
-      <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Bot Development</span></div>
-      <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">KOL Management</span></div>
-      <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Business Development</span></div>
-      <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Community Building</span></div>
-      <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Smart Contracts</span></div>
-      <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Web3 Strategy</span></div>
-      <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">dApp Development</span></div>
-      <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Base / Solidity</span></div>
-      <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Partnership Growth</span></div>
-      <div class="skill-item"><span class="skill-dot"></span><span class="skill-name">Multi-region Ops</span></div>
-    </div>
-  </section>
-
-  <!-- Connect -->
-  <section class="connect-section reveal" id="connect">
-    <div class="connect-title">Let's <em>Build</em><br/>Something.</div>
-    <p class="connect-sub">Open to collabs, partnerships, and conversations that matter.</p>
-    <div class="social-links">
-      <a href="https://x.com/abdyweb3" target="_blank" class="social-link">
-        𝕏 &nbsp;@abdyweb3
-      </a>
-      <a href="https://t.me/anonking1" target="_blank" class="social-link">
-        ✈️ &nbsp;@anonking1
-      </a>
-      <a href="https://www.linkedin.com/in/abdullahi-yakubu-7634403a5" target="_blank" class="social-link">
-        💼 &nbsp;LinkedIn
-      </a>
-      <a href="https://github.com/abdallerhnet-web" target="_blank" class="social-link">
-        ⌥ &nbsp;GitHub
-      </a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-left">© 2026 Abdullahi Yakubu · Africa</div>
-    <div class="footer-right">Built on <span>Base</span></div>
-  </footer>
-
+<!-- INTRO BAND -->
+<div class="intro-band">
+  <div class="intro-item">
+    <div class="intro-item-label">Based in</div>
+    <div class="intro-item-value"><em>Africa</em> — operating globally</div>
+  </div>
+  <div class="intro-divider"></div>
+  <div class="intro-item">
+    <div class="intro-item-label">Currently</div>
+    <div class="intro-item-value">Building <em>rep24</em> on Base · Competing in 2 hackathons</div>
+  </div>
+  <div class="intro-divider"></div>
+  <div class="intro-item">
+    <div class="intro-item-label">Approach</div>
+    <div class="intro-item-value">Non-technical. <em>Mobile-first.</em> Ships anyway.</div>
+  </div>
 </div>
 
+<div class="section-wrap">
+
+<!-- ABOUT -->
+<section class="section reveal">
+  <div class="sec-tag">About</div>
+  <div class="about-grid">
+    <div class="about-body">
+      <p>I build at the intersection of <strong>people, protocol, and product.</strong> From managing 250+ KOL relationships across 15+ regions worldwide — to shipping live smart contracts on Base. I get things done, from my phone, in the middle of the night, until it works.</p>
+      <blockquote class="about-pull">
+        <p>"Not a developer. Not a marketer. Something in between — and that's exactly what Web3 needs."</p>
+      </blockquote>
+      <p>My background is in community, partnerships, and growth. My instinct is in protocol design and product strategy. Rep24 exists because I saw a gap — AI agents need economic skin in the game, and nobody was building that accountability layer.</p>
+    </div>
+    <div>
+      <p class="about-body" style="margin-bottom:20px;font-size:16px;line-height:1.9;color:var(--text);font-weight:300;">Global reach is not a claim — it's the daily reality. KOL relationships across every major Web3 market, built from scratch, maintained from mobile.</p>
+      <div class="regions-list">
+        <span class="region-tag">Thailand</span><span class="region-tag">Korea</span><span class="region-tag">China</span><span class="region-tag">Singapore</span><span class="region-tag">Dubai</span><span class="region-tag">India</span><span class="region-tag">Vietnam</span><span class="region-tag">Turkey</span><span class="region-tag">Indonesia</span><span class="region-tag">France</span><span class="region-tag">Spain</span><span class="region-tag">Russia</span><span class="region-tag">Pakistan</span><span class="region-tag">Africa</span><span class="region-tag">+ more</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="section reveal" id="work">
+  <div class="sec-tag">What I Do</div>
+  <div class="work-list">
+    <div class="work-item">
+      <div class="work-num">01</div>
+      <div class="work-content">
+        <div class="work-title">Collab Manager</div>
+        <div class="work-company">Worldwide · 250+ KOLs</div>
+        <div class="work-desc">Managing 250+ KOL relationships across Thailand, Indonesia, China, Singapore, Korea, Dubai, India, Vietnam, Turkey, France, Spain, Russia, Pakistan, Africa and beyond. Building partnerships that move communities and drive real growth for Web3 projects globally.</div>
+      </div>
+      <div class="work-meta"><div class="work-icon">🤝</div></div>
+    </div>
+    <div class="work-item">
+      <div class="work-num">02</div>
+      <div class="work-content">
+        <div class="work-title">Business Development</div>
+        <div class="work-company">@ Victus Global</div>
+        <div class="work-desc">Driving strategic partnerships and growth initiatives. Connecting projects with the right people, communities, and resources to scale in competitive Web3 markets.</div>
+      </div>
+      <div class="work-meta"><div class="work-icon">📈</div></div>
+    </div>
+    <div class="work-item">
+      <div class="work-num">03</div>
+      <div class="work-content">
+        <div class="work-title">Community Manager</div>
+        <div class="work-company">Web3 Ecosystem</div>
+        <div class="work-desc">Building and nurturing communities that actually engage. Turning audiences into believers and believers into builders.</div>
+      </div>
+      <div class="work-meta"><div class="work-icon">🌐</div></div>
+    </div>
+    <div class="work-item">
+      <div class="work-num">04</div>
+      <div class="work-content">
+        <div class="work-title">On-Chain Builder</div>
+        <div class="work-company">Base · Solidity · Web · Bots</div>
+        <div class="work-desc">Non-traditional founder who ships. Deployed 5 live contracts on Base, built dApp frontends, websites and bots for Web3 projects — all from mobile. Proof that execution beats credentials.</div>
+      </div>
+      <div class="work-meta"><div class="work-icon">⚙️</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPETITIONS -->
+<section class="section reveal">
+  <div class="sec-tag">Active Competitions</div>
+  <div class="comp-grid">
+    <div class="comp-card live">
+      <div class="comp-name">The Synthesis</div>
+      <div class="comp-date">Deadline · March 22, 2026</div>
+      <div class="comp-desc">Competing with rep24 as the accountability layer for AI agent commerce — bridging x402 payments with on-chain reputation and economic consequences.</div>
+      <div class="comp-live">In Progress</div>
+    </div>
+    <div class="comp-card live">
+      <div class="comp-name">Virtuals Protocol</div>
+      <div class="comp-date">Deadline · April 15, 2026</div>
+      <div class="comp-desc">Positioning rep24 as the trust infrastructure for Virtuals agents — reputation staking, slashing governance, and RepBadge identity on Base.</div>
+      <div class="comp-live">In Progress</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECT -->
+<section class="section reveal" id="project">
+  <div class="sec-tag">Featured Project</div>
+  <div class="project-hero">
+    <div>
+      <div class="proj-badge">Live · Testnet · Base Sepolia</div>
+      <div class="proj-name">rep24</div>
+      <div class="proj-tagline">x402 pays · ERC-8004 identifies · rep24 verifies</div>
+      <p class="proj-desc">An on-chain reputation and economic accountability layer for AI agents, built on Base. Agents stake USDC to earn a RepBadge NFT. Bad work gets slashed. Good work grows your score. The missing trust layer for the agentic economy.</p>
+      <div class="proj-tags">
+        <span class="tag">Base Blockchain</span>
+        <span class="tag">Solidity</span>
+        <span class="tag">ERC-8004</span>
+        <span class="tag">x402</span>
+        <span class="tag">USDC Staking</span>
+        <span class="tag">NFT</span>
+        <span class="tag">Slashing</span>
+      </div>
+      <div class="contracts-block">
+        <div class="cb-title">Deployed Contracts</div>
+        <div class="cb-row"><span class="cb-name">RepBadge</span><span class="cb-addr">0xFc933B...ceAEd3</span></div>
+        <div class="cb-row"><span class="cb-name">RepScore</span><span class="cb-addr">0x2Bcc43...F08c3</span></div>
+        <div class="cb-row"><span class="cb-name">RepVault</span><span class="cb-addr">0x312292...573F</span></div>
+        <div class="cb-row"><span class="cb-name">SlashingGovernor</span><span class="cb-addr">0x78ee40...8c77</span></div>
+        <div class="cb-row"><span class="cb-name">MockUSDC</span><span class="cb-addr">0xDdB4dA...95de</span></div>
+      </div>
+    </div>
+    <div class="proj-actions">
+      <a href="https://abdallerhnet-web.github.io/rep24/" target="_blank" class="btn-primary">View dApp →</a>
+      <a href="https://github.com/abdallerhnet-web/rep24" target="_blank" class="btn-outline">GitHub</a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section reveal">
+  <div class="sec-tag">Skills & Tools</div>
+  <div class="skills-wrap">
+    <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Website Development</span></div>
+    <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Bot Development</span></div>
+    <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">KOL Management</span></div>
+    <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Business Development</span></div>
+    <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Community Building</span></div>
+    <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Smart Contracts</span></div>
+    <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Web3 Strategy</span></div>
+    <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">dApp Development</span></div>
+    <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Base / Solidity</span></div>
+    <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Partnership Growth</span></div>
+    <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Multi-region Ops</span></div>
+    <div class="skill-pill"><span class="skill-dot"></span><span class="skill-name">Protocol Strategy</span></div>
+  </div>
+</section>
+
+<!-- CONNECT -->
+<section class="connect-wrap reveal" id="connect">
+  <div>
+    <h2 class="connect-title">Let's<br/><em>Build</em><br/>Something.</h2>
+    <p class="connect-sub">Open to collabs, partnerships, and conversations that matter. From KOL deals to protocol integrations — if it moves the ecosystem forward, I'm in.</p>
+  </div>
+  <div class="links-stack">
+    <a href="https://x.com/abdyweb3" target="_blank" class="soc-link"><span class="soc-link-ico">𝕏</span>@abdyweb3<span class="soc-link-arrow">→</span></a>
+    <a href="https://x.com/Rep24_io" target="_blank" class="soc-link"><span class="soc-link-ico">𝕏</span>@Rep24_io<span class="soc-link-arrow">→</span></a>
+    <a href="https://t.me/anonking1" target="_blank" class="soc-link"><span class="soc-link-ico">✈️</span>@anonking1 · Telegram<span class="soc-link-arrow">→</span></a>
+    <a href="https://www.linkedin.com/in/abdullahi-yakubu-7634403a5" target="_blank" class="soc-link"><span class="soc-link-ico">💼</span>LinkedIn<span class="soc-link-arrow">→</span></a>
+    <a href="https://github.com/abdallerhnet-web" target="_blank" class="soc-link"><span class="soc-link-ico">⌥</span>GitHub<span class="soc-link-arrow">→</span></a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="foot-l">© 2026 Abdullahi Yakubu · Africa</div>
+  <div class="foot-r">Built on <span>Base</span></div>
+</footer>
+
+</div><!-- /section-wrap -->
+
 <script>
-  // Custom cursor
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
+// Cursor
+const cur=document.getElementById('cursor'),rng=document.getElementById('ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+(function anim(){rx+=(mx-rx)*0.11;ry+=(my-ry)*0.11;rng.style.left=rx+'px';rng.style.top=ry+'px';requestAnimationFrame(anim);})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(3)';rng.style.transform='translate(-50%,-50%) scale(1.8)';rng.style.borderColor='rgba(200,241,53,0.5)';});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';rng.style.transform='translate(-50%,-50%) scale(1)';rng.style.borderColor='rgba(200,241,53,0.3)';});
+});
 
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px';
-    cursor.style.top = my + 'px';
-  });
-
-  function animateRing() {
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top = ry + 'px';
-    requestAnimationFrame(animateRing);
-  }
-  animateRing();
-
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.transform = 'translate(-50%,-50%) scale(2)';
-      ring.style.transform = 'translate(-50%,-50%) scale(1.5)';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
-      ring.style.transform = 'translate(-50%,-50%) scale(1)';
-    });
-  });
-
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1 });
-
-  reveals.forEach(el => observer.observe(el));
+// Reveal
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}});},{threshold:0.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
 </body>
 </html>
+
